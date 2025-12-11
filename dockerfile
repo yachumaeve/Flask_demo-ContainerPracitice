@@ -1,17 +1,17 @@
 FROM python:3.9.5-slim
 
-# Step 1: 安裝 Python 依賴
-# 這裡應該不會失敗，因為基礎鏡像已經包含 pip
-RUN pip install flask redis
+# Step 0: 升級 pip 到最新版本 (關鍵修正)
+RUN pip install --no-cache-dir --upgrade pip
 
-# Step 2: 建立使用者和群組
-# 使用 -s /bin/false 確保用戶不能登入，更安全
-# 使用 -D 禁用家目錄創建，減少映像大小
+# Step 1: 安裝 Python 依賴
+# 使用 --no-cache-dir 確保不保留下載的快取
+RUN pip install --no-cache-dir flask redis
+
+# Step 2: 建立使用者和群組 (經測試，此步驟在 amd64 上已成功)
 RUN groupadd --gid 1000 flask && \
   useradd -r -g flask -s /bin/false -u 1000 flask
 
 # Step 3: 設定工作目錄和權限
-# 注意：為了安全起見，建議先創建 /src，再COPY
 RUN mkdir /src && \
   chown -R flask:flask /src
 
