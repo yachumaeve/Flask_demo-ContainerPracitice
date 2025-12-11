@@ -9,4 +9,4 @@ jobs:
       - name: docker image build
         run: docker build -t maeveyang/flask_demo:latest
       - name: list docker image
-        uses: docker image ls
+        run: docker image ls
