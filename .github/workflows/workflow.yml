@@ -16,7 +16,7 @@ jobs:
       - name: Available platforms
         run: echo ${{ steps.buildx.outputs.platforms}}
       - name: build and push
-        run:
+        run:|
           docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
           docker buildx ls
           docker buildx build --push --platforms linux/arm/v7,linux/arm64/v8,linux/amd64 -t maeveyang/flask-demo:latest
