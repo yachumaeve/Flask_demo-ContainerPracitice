@@ -1,0 +1,12 @@
+name: Docker image buildx and push
+on: [push]
+jobs:
+  Docker-Build-Push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: docker image build
+        runs: docker build -t maeveyang/flask_demo:latest
+      - name: list docker image
+        uses: docker image ls
