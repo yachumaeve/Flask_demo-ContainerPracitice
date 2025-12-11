@@ -7,6 +7,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
       - name: docker image build
-        runs: docker build -t maeveyang/flask_demo:latest
+        run: docker build -t maeveyang/flask_demo:latest
       - name: list docker image
         uses: docker image ls
